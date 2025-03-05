@@ -9,11 +9,13 @@ const getTodaysWeather = async (searchTerm, units) => {
         console.log(url);
         const response = await fetch(url);
         const json = await response.json();
-        console.log(json);
+        return json;
     } catch (error) {
         console.error(`Error fetching data: ${error.message}`);
     }
 }
+
+// create function to get the next 7 days forecast
 
 
 export { getTodaysWeather }

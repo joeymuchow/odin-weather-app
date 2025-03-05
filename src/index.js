@@ -1,9 +1,12 @@
 import "./styles.css";
 import { getTodaysWeather } from "./api";
+import { extractTodaysWeatherData } from "./data";
 
 console.log("Hello from index");
 
-getTodaysWeather("hillsboro", "us");
+const response = await getTodaysWeather("hillsboro", "us");
+const todaysWeather = extractTodaysWeatherData(response);
+console.log(todaysWeather);
 // A lot of this will probably be in separate files
 
 // async function to fetch weather data from the Visual Crossing API
