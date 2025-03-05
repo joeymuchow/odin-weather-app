@@ -1,24 +1,21 @@
 import "./styles.css";
-import { getWeatherData } from "./api";
-import { extractTodaysWeatherData, extractNext7DaysWeatherData } from "./data";
+import { renderPage } from "./render";
 
-const response = await getWeatherData("hillsboro", "us");
-const todaysWeather = extractTodaysWeatherData(response);
-const next7DaysWeather = extractNext7DaysWeatherData(response.days);
-console.log(todaysWeather);
-console.log(next7DaysWeather);
+
+renderPage();
+// const response = await getWeatherData("hillsboro", "us");
+// const todaysWeather = extractTodaysWeatherData(response);
+// const next7DaysWeather = extractNext7DaysWeatherData(response.days);
+// console.log(todaysWeather);
+// console.log(next7DaysWeather);
+
+
 // A lot of this will probably be in separate files
-
-// async function to fetch weather data from the Visual Crossing API
-// use encodeURIComponent() for the search term
 
 // function to handle errors from Visual Crossing API
 
 // function to render the initial content of the page
 // title, label, input, error message field, and button(form?)
-
-// function to receive the data from the fetch and extract the data we want
-// then return that object to a render function?
 
 // function to render the weather data on the screen
 // this function will call other functions to render specific info
