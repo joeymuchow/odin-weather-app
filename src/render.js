@@ -1,6 +1,3 @@
-import { getWeatherData } from "./api";
-import { extractTodaysWeatherData, extractNext7DaysWeatherData } from "./data";
-
 const renderPage = () => {
     const body = document.querySelector("body");
 
@@ -31,6 +28,7 @@ const renderForm = () => {
     searchLabel.setAttribute("for", "place-search");
     const searchInput = document.createElement("input");
     searchInput.id = "place-search";
+    searchInput.required = "true";
     const errorMessage = document.createElement("p");
     errorMessage.classList.add("error");
 
