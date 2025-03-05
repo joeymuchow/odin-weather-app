@@ -5,10 +5,46 @@
 body {
     background-color: #ffffff;
     margin: 0 auto;
-    max-width: min(100%, 1100px);
+    max-width: min(100%, 700px);
     width: 100%;
+    font-size: 16px;
 }
 
 h1 {
     text-align: center;
+}
+
+#place-form {
+    display: grid;
+    grid-template-columns: 1fr auto auto;
+    grid-template-areas: 
+        "label . ."
+        "input select button"
+        "error . .";
+    gap: 5px;
+    align-items: center;
+}
+
+label {
+    grid-area: label;
+}
+
+#place-search {
+    grid-area: input;
+}
+
+.select-container {
+    grid-area: select;
+}
+
+.btn-container {
+    grid-area: button;
+}
+
+button.search {
+    cursor: pointer;
+}
+
+.error {
+    grid-area: error;
 }
