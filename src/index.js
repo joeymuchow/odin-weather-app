@@ -1,8 +1,9 @@
 import "./styles.css";
+import { getTodaysWeather } from "./api";
 
 console.log("Hello from index");
 
-
+getTodaysWeather("hillsboro", "us");
 // A lot of this will probably be in separate files
 
 // async function to fetch weather data from the Visual Crossing API
