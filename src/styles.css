@@ -1,6 +1,6 @@
 :root {
     box-sizing: border-box;
-    padding: 5px 10px;
+    padding: 5px 10px 50px;
 }
 
 body {
@@ -14,6 +14,11 @@ body {
 h1 {
     text-align: center;
     font-size: 2.5rem;
+}
+
+h2 {
+    text-align: center;
+    font-size: 2rem;
 }
 
 p {
@@ -76,6 +81,12 @@ button.search {
     margin: 12px 0;
 }
 
+.today {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
 .today .main {
     display: grid;
     grid-template-areas: 
@@ -130,12 +141,96 @@ button.search {
     font-size: 2rem;
 }
 
-@media (max-width: 500px) {
+.forecast.show {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 10px;
+    background-color: #C7A27C;
+    padding: 0 10px;
+}
+
+.forecast .day {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.forecast .weather-icon {
+    width: 100%;
+}
+
+.forecast .day > div {
+    display: flex;
+    gap: 10px;
+}
+
+.forecast .day > p {
+    font-size: 1.8rem;
+}
+
+.forecast .day .high-temp {
+    font-size: 1.2rem;
+}
+
+.forecast .day .low-temp {
+    font-size: 0.8rem;
+    align-self: center;
+    opacity: 0.9;
+}
+
+@media (max-width: 750px) {
     #place-form {
         grid-template-areas: 
         "label label"
         "input input"
         "select button"
         "error error";
+    }
+
+    .today {
+        display: flex;
+        flex-direction: column;
+        gap: 15px;
+    }
+
+    .today .weather-icon {
+        height: 175px;
+    }
+
+    .today .secondary {
+        gap: 15px;
+    }
+
+    .today .other-temps,
+    .today .humidity,
+    .today .description {
+        font-size: 1.5rem;
+    }
+
+    .forecast.show {
+        display: grid;
+        grid-template-columns: minmax(100px, 200px);
+        grid-template-rows: repeat(7, 1fr);
+        justify-content: center;
+        margin: 25px 15%;
+        gap: 20px;
+    }
+
+    .forecast .day > p {
+        font-size: 2.2rem;
+    }
+
+    .forecast .day .high-temp {
+        font-size: 2rem;
+    }
+    
+    .forecast .day .low-temp {
+        font-size: 1.2rem;
+    }
+}
+
+@media (max-width: 550px) {
+    .today .weather-icon {
+        height: 125px;
     }
 }

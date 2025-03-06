@@ -1,6 +1,6 @@
 import { getWeatherData } from "./api";
 import { extractTodaysWeatherData, extractNext7DaysWeatherData } from "./data";
-import { renderTodaysWeather } from "./render";
+import { renderTodaysWeather, renderForecast } from "./render";
 
 const elementCache = {};
 
@@ -10,7 +10,7 @@ const cacheDom = () => {
     elementCache.unitSelect = document.querySelector(".unit-select");
     elementCache.submitBtn = document.querySelector(".search");
     elementCache.todayContainer = document.querySelector(".today");
-    elementCache.next7DaysContainer = document.querySelector(".next-7-days");
+    elementCache.next7DaysContainer = document.querySelector(".forecast");
 }
 
 const bindEvents = () => {
@@ -58,6 +58,7 @@ const fetchWeather = async (e) => {
             console.log(forecast);
             // call render functions for today's weather and next 7 days
             renderTodaysWeather(today);
+            renderForecast(forecast);
         }
     }
 }

@@ -1,4 +1,4 @@
-
+import { format } from "date-fns";
 
 const renderPage = () => {
     const body = document.querySelector("body");
@@ -14,10 +14,10 @@ const renderPage = () => {
     todayContainer.classList.add("today");
 
     // container for 7 day forecast
-    const next7DaysContainer = document.createElement("div");
-    next7DaysContainer.classList.add("next-7-days");
+    const forecastContainer = document.createElement("div");
+    forecastContainer.classList.add("forecast-container");
 
-    body.append(title, form, todayContainer, next7DaysContainer);
+    body.append(title, form, todayContainer, forecastContainer);
 }
 
 // render place form
@@ -79,15 +79,16 @@ const renderTodaysWeather = (data) => {
     conditions.textContent = data.conditions;
 
     const weatherIcon = renderWeatherIcon(data.icon);
-    const icon = document.createElement("p");
-    icon.classList.add("icon");
-    icon.textContent = data.icon;
 
     mainData.append(temp, conditions, weatherIcon);
 
-    const otherTemps = document.createElement("p");
+    const otherTemps = document.createElement("div");
     otherTemps.classList.add("other-temps");
-    otherTemps.textContent = `${data.tempHigh}\u00B0 / ${data.tempLow}\u00B0 Feels like ${data.feelsLike}\u00B0`;
+    const highLow = document.createElement("p");
+    highLow.textContent = `${data.tempHigh}\u00B0 / ${data.tempLow}\u00B0`;
+    const feelsLike = document.createElement("p");
+    feelsLike.textContent = `Feels like ${data.feelsLike}\u00B0`;
+    otherTemps.append(highLow, feelsLike);
 
     const humidity = document.createElement("p");
     humidity.classList.add("humidity");
@@ -101,12 +102,51 @@ const renderTodaysWeather = (data) => {
     secondaryData.classList.add("secondary");
     secondaryData.append(otherTemps, humidity, description);
 
-    container.append(location, mainData, icon, secondaryData);
+    container.append(location, mainData, secondaryData);
 }
 
 // render 7 day forecast
+const renderForecast = (daysData) => {
+    const container = document.querySelector(".forecast-container");
+    container.replaceChildren();
+
+    const forecast = document.createElement("div");
+    forecast.classList.add("forecast");
+    forecast.classList.add("show");
+
+    const title = document.createElement("h2");
+    title.textContent = "7 Day Forecast";
+
+    for(const day of daysData) {
+        const dayContainer = document.createElement("div");
+        dayContainer.classList.add("day");
+
+        const date = new Date(day.date);
+        const dayName = document.createElement("p");
+        dayName.textContent = format(date, "E");
+
+        const weatherIcon = renderWeatherIcon(day.icon);
+
+        const temps = document.createElement("div");
+        const high = document.createElement("p");
+        high.classList.add("high-temp");
+        high.textContent = day.tempHigh + "\u00B0";
+        const low = document.createElement("p");
+        low.classList.add("low-temp");
+        low.textContent = day.tempLow + "\u00B0";
+        temps.append(high, low);
+
+        dayContainer.append(dayName, weatherIcon, temps);
+        forecast.append(dayContainer);
+    }
+
+    container.append(title, forecast);
+}
 
 const renderWeatherIcon = (iconText) => {
+    if (iconText === "fog") {
+        iconText = "cloudy";
+    }
     const image = document.createElement("img");
     image.classList.add("weather-icon");
     const iconPath = require(`./icons/${iconText}.png`);
@@ -114,4 +154,4 @@ const renderWeatherIcon = (iconText) => {
     return image;
 }
 
-export { renderPage, renderTodaysWeather }
+export { renderPage, renderTodaysWeather, renderForecast }
