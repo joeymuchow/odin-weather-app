@@ -17,7 +17,17 @@ const renderPage = () => {
     const forecastContainer = document.createElement("div");
     forecastContainer.classList.add("forecast-container");
 
-    body.append(title, form, todayContainer, forecastContainer);
+    const spinnerSrc = require(`./icons/spinner.gif`);
+    const spinner = document.createElement("img");
+    spinner.src = spinnerSrc;
+    spinner.classList.add("spinner", "hide");
+
+    const content = document.createElement("div");
+    content.append(title, form, todayContainer, forecastContainer, spinner);
+    content.classList.add("content");
+
+    // footer exists in template html so we add content before it
+    body.prepend(content);
 }
 
 // render place form
@@ -61,7 +71,6 @@ const renderForm = () => {
 // render today's weather
 const renderTodaysWeather = (data) => {
     const container = document.querySelector(".today");
-    container.replaceChildren();
 
     const location = document.createElement("p");
     location.classList.add("location");
@@ -108,7 +117,6 @@ const renderTodaysWeather = (data) => {
 // render 7 day forecast
 const renderForecast = (daysData) => {
     const container = document.querySelector(".forecast-container");
-    container.replaceChildren();
 
     const forecast = document.createElement("div");
     forecast.classList.add("forecast");

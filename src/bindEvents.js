@@ -9,8 +9,9 @@ const cacheDom = () => {
     elementCache.errorMessage = document.querySelector(".error");
     elementCache.unitSelect = document.querySelector(".unit-select");
     elementCache.submitBtn = document.querySelector(".search");
+    elementCache.spinner = document.querySelector(".spinner");
     elementCache.todayContainer = document.querySelector(".today");
-    elementCache.next7DaysContainer = document.querySelector(".forecast");
+    elementCache.next7DaysContainer = document.querySelector(".forecast-container");
 }
 
 const bindEvents = () => {
@@ -27,6 +28,11 @@ const clearInputError = () => {
 
 const fetchWeather = async (e) => {
     e.preventDefault();
+    
+    elementCache.todayContainer.replaceChildren();
+    elementCache.next7DaysContainer.replaceChildren();
+    elementCache.spinner.classList.toggle("hide");
+    
     const searchIsValid = elementCache.searchInput.checkValidity();
     if (!searchIsValid) {
         elementCache.errorMessage.textContent = "Please enter a location";
@@ -46,6 +52,7 @@ const fetchWeather = async (e) => {
                 elementCache.errorMessage.textContent = "Unexpected error, please try again.";
             });
 
+        elementCache.spinner.classList.toggle("hide");
         // if response has a status, something went wrong, so show error
         if (response.status) {
             elementCache.errorMessage.textContent = response.status === 400 ?
