@@ -9,6 +9,7 @@ const extractTodaysWeatherData = (response) => {
     data.tempLow = response.days[0].tempmin;
     data.humidity = response.currentConditions.humidity;
     data.description = response.days[0].description;
+    data.icon = response.currentConditions.icon;
 
     return data;
 }

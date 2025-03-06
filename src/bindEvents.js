@@ -1,5 +1,6 @@
 import { getWeatherData } from "./api";
 import { extractTodaysWeatherData, extractNext7DaysWeatherData } from "./data";
+import { renderTodaysWeather } from "./render";
 
 const elementCache = {};
 
@@ -35,7 +36,6 @@ const fetchWeather = async (e) => {
 
         const response = await getWeatherData(searchTerm, units)
             .then((response) => {
-                console.log(response);
                 if (!response.ok) {
                     return response;
                 }
@@ -43,8 +43,9 @@ const fetchWeather = async (e) => {
             })
             .catch((error) => {
                 console.error(`Error fetching data: ${error.message}`);
+                elementCache.errorMessage.textContent = "Unexpected error, please try again.";
             });
-        console.log(response);
+
         // if response has a status, something went wrong, so show error
         if (response.status) {
             elementCache.errorMessage.textContent = response.status === 400 ?
@@ -56,6 +57,7 @@ const fetchWeather = async (e) => {
             console.log(today);
             console.log(forecast);
             // call render functions for today's weather and next 7 days
+            renderTodaysWeather(today);
         }
     }
 }

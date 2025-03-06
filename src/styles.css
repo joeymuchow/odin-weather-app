@@ -12,6 +12,11 @@ body {
 
 h1 {
     text-align: center;
+    font-size: 2.5rem;
+}
+
+p {
+    margin: 0;
 }
 
 #place-form {
@@ -56,7 +61,66 @@ button.search {
 
 .error {
     grid-area: error;
-    margin: 0;
     color: #ff0000;
     font-size: 1rem;
+}
+
+.location {
+    text-align: center;
+    font-size: 2.5rem;
+    margin: 12px 0;
+}
+
+.today .main {
+    display: grid;
+    grid-template-areas: 
+        "temp icon"
+        "conditions icon";
+    grid-template-columns: 1fr 1fr;
+    align-items: center;
+    column-gap: 20px;
+}
+
+.today .temperature {
+    grid-area: temp;
+    font-size: 3rem;
+    justify-self: center;
+    align-self: end;
+}
+
+.today .conditions {
+    grid-area: conditions;
+    font-size: 2rem;
+    justify-self: center;
+    align-self: start;
+}
+
+.today .weather-icon {
+    grid-area: icon;
+    height: 200px;
+    border: 1px solid black;
+    justify-self: left;
+}
+
+.today .secondary {
+    display: grid;
+    grid-template-areas: 
+        "otherTemps humidity"
+        "description description";
+    row-gap: 15px;
+}
+
+.today .other-temps {
+    grid-area: otherTemps;
+    font-size: 2rem;
+}
+
+.today .humidity {
+    grid-area: humidity;
+    font-size: 2rem;
+}
+
+.today .description {
+    grid-area: description;
+    font-size: 2rem;
 }

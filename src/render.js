@@ -1,3 +1,5 @@
+
+
 const renderPage = () => {
     const body = document.querySelector("body");
 
@@ -57,7 +59,59 @@ const renderForm = () => {
 }
 
 // render today's weather
+const renderTodaysWeather = (data) => {
+    const container = document.querySelector(".today");
+    container.replaceChildren();
+
+    const location = document.createElement("p");
+    location.classList.add("location");
+    location.textContent = data.location;
+
+    const mainData = document.createElement("div");
+    mainData.classList.add("main");
+
+    const temp = document.createElement("p");
+    temp.classList.add("temperature");
+    temp.textContent = data.temperature + "\u00B0";
+
+    const conditions = document.createElement("p");
+    conditions.classList.add("conditions");
+    conditions.textContent = data.conditions;
+
+    const weatherIcon = renderWeatherIcon(data.icon);
+    const icon = document.createElement("p");
+    icon.classList.add("icon");
+    icon.textContent = data.icon;
+
+    mainData.append(temp, conditions, weatherIcon);
+
+    const otherTemps = document.createElement("p");
+    otherTemps.classList.add("other-temps");
+    otherTemps.textContent = `${data.tempHigh}\u00B0 / ${data.tempLow}\u00B0 Feels like ${data.feelsLike}\u00B0`;
+
+    const humidity = document.createElement("p");
+    humidity.classList.add("humidity");
+    humidity.textContent = `Humidity: ${data.humidity}%`;
+
+    const description = document.createElement("p");
+    description.classList.add("description");
+    description.textContent = data.description;
+
+    const secondaryData = document.createElement("div");
+    secondaryData.classList.add("secondary");
+    secondaryData.append(otherTemps, humidity, description);
+
+    container.append(location, mainData, icon, secondaryData);
+}
 
 // render 7 day forecast
 
-export { renderPage }
+const renderWeatherIcon = (iconText) => {
+    const image = document.createElement("img");
+    image.classList.add("weather-icon");
+    const iconPath = require(`./icons/${iconText}.png`);
+    image.src = iconPath;
+    return image;
+}
+
+export { renderPage, renderTodaysWeather }
